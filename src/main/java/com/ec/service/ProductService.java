@@ -1,6 +1,5 @@
 package com.ec.service;
 
-import com.ec.model.Cart;
 import com.ec.model.Product;
 import com.ec.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,14 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Optional<Product> getProduct(int id){
-        return  productRepository.findById(id);
+    public Optional<Product> getProduct(int id) {
+        try {
+           Optional<Product> p= productRepository.findById(id);
+           return p;
+        } catch (Exception e) {
+            return null;
+        }
     }
-
     public List<Product> getProducts(){
         return productRepository.findAll();
     }

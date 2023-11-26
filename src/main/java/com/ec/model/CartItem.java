@@ -1,10 +1,16 @@
 package com.ec.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

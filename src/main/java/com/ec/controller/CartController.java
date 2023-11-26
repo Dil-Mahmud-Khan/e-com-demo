@@ -28,6 +28,11 @@ public class CartController {
         }
     }
 
+    public ResponseEntity addProductToCart(@PathVariable int id, @PathVariable int productId,@PathVariable int quantity){
+        cartService.addProductTocart(id,productId,quantity);
+        return ResponseEntity.status(HttpStatus.OK).body("Added to cart ");
+    }
+
 
     @PutMapping("/")
     public ResponseEntity UpdateCart(@RequestBody Cart cart){
@@ -61,7 +66,7 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found");
         }
     }
-////
+
     @GetMapping("/")
     public ResponseEntity getCarts(){
         try{

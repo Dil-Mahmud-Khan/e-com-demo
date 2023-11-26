@@ -37,10 +37,14 @@ public class User implements UserDetails {
     public UserDto toUserDto(){
         UserDto userDto=new UserDto();
         userDto.setId(id);
+        userDto.setUsername(username);
         userDto.setFirstname(firstname);
         userDto.setLastname(lastname);
         userDto.setEmail(email);
         userDto.setRole(role);
+        userDto.setCart(cart);
+
+
         return userDto;
     }
 

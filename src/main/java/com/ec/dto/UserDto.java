@@ -25,10 +25,11 @@ public class UserDto {
     private String lastname;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
     private Cart cart;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
 
 }
