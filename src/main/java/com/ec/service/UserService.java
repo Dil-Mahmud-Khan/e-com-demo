@@ -15,34 +15,22 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-//    private final PasswordEncoder passwordEncoder;
-//    public UserService(PasswordEncoder passwordEncoder) {
-//        this.passwordEncoder = passwordEncoder;
-//    }
-
-//    public User createUser(User user){
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        return userRepository.save(user);
-//    }
-
-
-
     public User updateUser(User id){
+
         return userRepository.save(id);
     }
 
     public void deleteUser(int id){
+
         userRepository.deleteById(id);
     }
 
     public Optional<User> getUser(int id){
-       return userRepository.findById(id);
+
+        return userRepository.findById(id);
     }
     public List<User> getUsers(){
         return userRepository.findAll();
     }
-//    public User updateUser(){
-//        return (User) userRepository.findAll();
-//    }
 
 }

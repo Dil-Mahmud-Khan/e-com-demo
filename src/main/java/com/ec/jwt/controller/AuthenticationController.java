@@ -4,6 +4,7 @@ import com.ec.jwt.model.AuthenticationRequest;
 import com.ec.jwt.service.AuthenticationService;
 import com.ec.jwt.model.AuthenticationResponse;
 import com.ec.jwt.model.RegisterRequest;
+import com.ec.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
