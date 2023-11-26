@@ -27,11 +27,12 @@ public class User implements UserDetails {
     private String lastname;
     private String email;
     private String password;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
     private Cart cart;
     @Enumerated(EnumType.STRING)
     private Role role;
+
 
     public UserDto toUserDto(){
         UserDto userDto=new UserDto();

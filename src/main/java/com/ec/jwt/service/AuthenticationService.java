@@ -3,6 +3,7 @@ package com.ec.jwt.service;
 import com.ec.jwt.model.AuthenticationRequest;
 import com.ec.jwt.model.AuthenticationResponse;
 import com.ec.jwt.model.RegisterRequest;
+import com.ec.model.Cart;
 import com.ec.model.Role;
 import com.ec.model.User;
 import com.ec.repository.UserRepository;
@@ -29,13 +30,19 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        repository.save(user);
-       var jwtToken=jwtService.generateToken(user);
+        //repository.save(user);
+
+        Cart cart=new Cart();
+        user.setCart(cart);
+        User savedUser=repository.save(user);
+
+
+
+       var jwtToken=jwtService.generateToken(savedUser);
 
     return AuthenticationResponse.builder()
-
             .token(jwtToken)
-            .user(user.toUserDto())
+            .user(savedUser.toUserDto())
             .build();
     }
 
