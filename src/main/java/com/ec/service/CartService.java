@@ -1,9 +1,6 @@
 package com.ec.service;
 
-import com.ec.model.Cart;
-import com.ec.model.CartItem;
-import com.ec.model.Product;
-import com.ec.model.User;
+import com.ec.model.*;
 import com.ec.repository.CartRepository;
 import com.ec.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -26,19 +23,26 @@ public class CartService {
 
 
     public void addProductTocart(int id,int productId,int quantity){
-        Optional<User> user= Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id)));
+        User user= (userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id)));
 
-        Optional<Product> product=productService.getProduct(productId);
+
+       Product product=productService.getProduct(productId).orElseThrow(()->new EntityNotFoundException("Product not found with id"+id));
         if (product == null) {
             throw new EntityNotFoundException("Product not found with id: " + productId);
         }
 
         CartItem cartItem=new CartItem();
-        cartItem.setCart(user.get().getCart());
-        cartItem.setProduct(user.get().getCart().getCartItems().get(id).getProduct());     // might be a wrong system to get this
+        cartItem.setCart(user.getCart());
+        cartItem.setProduct(product);
         cartItem.setQuantity(quantity);
 
+        if(user.getCart()==null){
+            user.setCart(new Cart());
+        }
+        user.getCart().getCartItems().add(cartItem);
 
+       userRepository.save(user);
     }
 
     public Cart createCart(Cart cart){

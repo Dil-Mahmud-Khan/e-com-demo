@@ -28,6 +28,8 @@ public class CartController {
         }
     }
 
+
+    @PostMapping("/")
     public ResponseEntity addProductToCart(@PathVariable int id, @PathVariable int productId,@PathVariable int quantity){
         cartService.addProductTocart(id,productId,quantity);
         return ResponseEntity.status(HttpStatus.OK).body("Added to cart ");
